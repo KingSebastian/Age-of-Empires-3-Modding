@@ -1,0 +1,33 @@
+# Vanilla
+homecitygermans:Germans
+homecitydutch:Dutch
+homecitybritish:British
+homecityspanish:Spanish
+homecityottomans:Ottomans
+homecityportuguese:Portuguese
+homecityrussians:Russians
+homecityfrench:French
+
+# Vanilla Campaign Civs [defaultdirectoryid must be set to 3] (No starting crates and no explorer) (Malta, Mercs, USA)
+blood ice steel\homecitySPCAct1:SPCAct1
+blood ice steel\homecitySPCAct2:SPCAct2
+blood ice steel\homecitySPCAct3:SPCAct3
+
+# Vanilla Campaign Enemies (Normal British, but no starting crates)
+homecitybritish:Pirate
+homecitybritish:TheCircle
+homecitybritish:NativeAmerican
+
+# TWC Campaign Enemies
+homecityXPSPC:XPSPC
+
+# TAD Campaign Civs (No Hero, and different consulate allies/techs)
+homecitySPC_CC:SPCChinese
+homecitySPC_JC:SPCJapanese
+homecitySPC_IC:SPCIndians
+
+# TAD Campaign Enemies
+homecitySPC_JC:SPCJapaneseEnemy
+homecitybritish:SPCCompany
+
+# Extra Note: You could mix civilizations with other homecities, for example homecitygermans:Spanish, gives you a fast shipment nation, with a strong shipment homecity.
