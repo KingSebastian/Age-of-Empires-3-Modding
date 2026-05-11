@@ -4,7 +4,7 @@ In this repo we explore a variety of modding concepts from Age of Empires 3 (Van
 
 Main topics include:
 
-- User and System Files (What does/doesn't break multiplayer compatatbility)
+- User and System Files (What does/doesn't break multiplayer compatibility)
 - Home Cities (editing, unlocking campaign/hidden nations)
 - Creating New Hotkeys
 - Visual Changes (Colors, architecture)
@@ -121,7 +121,7 @@ Having in mind the previously defined `USER` folder as root, we would expect a t
 
 _Note: The `{2,3}` is used to simplify the presence of the expansions._
 
-Of all these folders, some will be of higher importance to us than others, in particular the `RM` and `Savegame` folders. However I will still breefely walk over each one, and explaining their usefulness. Feel free to skip to the [first mini project](#editing-home-city-level-and-more).
+Of all these folders, some will be of higher importance to us than others, in particular the `RM` and `Savegame` folders. However I will still briefly walk over each one, and explaining their usefulness. Feel free to skip to the [first mini project](#editing-home-city-level-and-more).
 
 ### USER Files structure
 
@@ -151,7 +151,7 @@ Probably the most important folder, at least of us. Keeps the files regarding Ho
 
 \_Side Note: The games records games as `Record Game {1-9}.age3rec`, by constantly pushing them up and saving the new one as 1. This unfortunately means that old recordings get deleted.
 
-The recordings can only be watched inside the game, and they should not be edited. There are a couple of other tools that can analise recordings, to see who played, who won, which map was played, civilizations.
+The recordings can only be watched inside the game, and they should not be edited. There are a couple of other tools that can analyse recordings, to see who played, who won, which map was played, civilizations.
 Likewise, I wouldnt recommend touching the savegames, denoted as `.age3sav` files, unless you intend to paste someone else files into your folder, or delete some of yours.
 
 The homecity files can be edited heavily, adn easily. And will be the subject of our first project, still inside this `USER` files module.
@@ -415,7 +415,7 @@ Age of Empires 3 main files are located in `.bar` files, like `SYSTEM\data\Data.
 
 The `SYSTEM` Files come in two big groups. `UI` files, and `Data` files. The boundary is not exactly clear, but for a rule of thumb `UI` files are those who define visual things only, while `Data` ones can be mixed.
 
-Now, why are we even differincing between the two of them? Well, `Data` files contribute to the checksum at game start, while the `UI` ones don't. In practical terms this means that if you change a `UI` file you will still be able to play with other players without compatability problems, but, if you try to do the same, but with a `Data` file, it it fail (CRC error), as for all effecst and porpuses, you are playing a different game version/mod.
+Now, why are we even differentiating between the two of them? Well, `Data` files contribute to the checksum at game start, while the `UI` ones don't. In practical terms this means that if you change a `UI` file you will still be able to play with other players without compatability problems, but, if you try to do the same, but with a `Data` file, it it fail (CRC error), as for all effects and purposes, you are playing a different game version/mod.
 
 Also, take into mind that while USER files get hotloaded, SYSTEM files are read once at game start. Any change to the files means the game needs to be restarted.
 
@@ -453,13 +453,145 @@ _See, and get, the full file here: [playercolors.xml](./Project2_PlayerColors/pl
 
 The file itself, like the homecities before, is written in `.xml`.
 
-There are two main parts. PlayerX_color, and the _friend or foe_ colors. The first are `0: Mother Nature`, `1-8: Normal Players` and `9-12: Mostly for scenarios`. As for the _friend or foe_, they are the more commonly known team colors, ususally blue, yellow and red, for self, allies, and enemies respectively.
+There are two main parts. PlayerX*color, and the \_friend or foe* colors. The first are `0: Mother Nature`, `1-8: Normal Players` and `9-12: Mostly for scenarios`. As for the _friend or foe_, they are the more commonly known team colors, ususally blue, yellow and red, for self, allies, and enemies respectively.
 
 > Side Note: If you intend to play multiplayer, having color too different from the original can lead to confusing communication regarding colors.
 
 ### New Hotkeys
 
+This Project will be rather small, as there aren't many interesting extra hotkey options, at least in the base game, which is the one we will be using here. However there can be some specifc ones like loading a save game, recorded game or even a scenario.
+
+Hotkeys are also a little bit special as one can add them to both `USER` or `SYSTEM` files without any issues. Most often when you write a file it will replace the `SYSTEM` equivalent, but for configuration files it's slightly different. Instead of overriding they append.
+
+Im intruducing this project at this point also because it will allow me to introduce you to one of Age of Empires design features. In this game, everything is driven by commands sent to the engine. Essentially, every action the game takes, whether it’s moving a unit, updating the interface, or executing AI behavior, is triggered by a command. Most commands can be grouped, by their starting prefix, into the following categories:
+
+- **XS** – Custom commands created for specific behaviors or modding purposes.
+- **KB** – Knowledge-base related commands.
+- **AI** – Commands that control the game’s AI.
+- **RM** – Random Map related commands (Used to create the maps themselves).
+- **TR** – Trigger commands, often used for events and scripted actions.
+- **UI** – User interface commands that update menus, buttons, and displays.
+
+But there are some other smaller categories, namely:
+
+- camera
+- toggle
+- load/save
+- gadget
+
+A few even more obscure groups like `edit`, `move`, `render` and `toggle`, and obviously some extra miscelaneous, like `player`, `fog`, `blackmap`.
+
+> We will look in depth into some of them in later projects. Meanwhile if you just wish to see all commands, or explore them a bit, head on over to this [Language Server Protocol]() Project.
+
+Back to the hotkeys, let's start analising the `SYSTEM\Startup\hotkeys.con` file.
+
+> Note that although our work here will be rather small, there is quite a lot to grasp and learn. So don't feel overwhelmed.
+
+Looking at the first group:
+
+```c
+map ("/", "game", "uiFindType(\"Hero\")")
+map ("'", "game", "uiFindType(\"Ship\")")
+map (".", "game", "uiFindIdleType(\"ValidIdleVillager\")")
+map (",", "game", "uiFindIdleType(\"Military\")")
+map (";", "game", "uiFindType(\"AbstractWagon\")")
+map ("space", "game", "uiLookAtSelection")
+map ("h", "game", "toggleHomeCityView")
+map ("t", "game", "uiFindType(\"TownCenter\")")
+```
+
+We can immediately identify a pattern as follows:
+
+```c
+map (<key>, "game", <command>)
+```
+
+And we would be already mostly there. The only thing we could add is that "game" isn't just a constant, but it's actually the context.
+
+Afaik there are the following main contextes:
+
+- root (Everywhere)
+- game (Single- or Multi Player match)
+- scenario (Scenario Editor)
+- world (game + scenario)
+- xxxAccel (simulates a mouse click on that button for that context)
+
+and lots of other smaller niche ones: `cinematic`, `xsdebugger`, `tributedialog`, `playerComms`, `attackMove`, `flare`, `repair`, well you can follow the file and see many others.
+
+Regardless, a context, is a state that controls stuff like allowed commands, ui, mouse pointer, music. Everything in AoE3 is connected to a context.
+
+It's also crucial to point out two other things. Strings need to be properly escaped , and you can chain commands.
+Example of both on line 16:
+
+```c
+map ("control-b", "game", "uiFindType(\"Barracks\") uiFindType(\"Blockhouse\")")
+```
+
+Finally we can start having some fun.
+Let's start with two of the most common requested hotkeys: , and Wall to Game hotkey.
+
+Building Rotator
+
+```c
+map ("shift-mousez", "building", "uiWheelRotatePlacedUnit")
+```
+
+and Wall to Gate hotkey.
+
+```c
+map ("g", "game", "uiTransformSelectedUnit(\"CWallGate\")")
+```
+
+Notice how in the first one our context is not `game`, but `building`. So when we are "building" and then use "shift-mousez" (Mouse Wheel Rotation) it will call the `uiWheelRotatePlacedUnit` engine command, that will then rotate the building.
+
+> When a command is a simple function, with no arguments, we can omit the ()
+
+On the second hotkey we are back to our "game" context, and in this case we use a special command `uiTransformSelectedUnit`, why do I say special? Because in this case the game will try to apply this command to anyhing selected, but it will only work on Wall types, as they are the only ones with the ability to transform into games.
+
+> I did say wall types, as the game allows you to convert any wall piece into a game, including connectors, and 1x2 pieces. Even more noteworthy is that the process is repeatable and reversible. All 4 types of walls can transform into all other four types of walls.
+>
+> > CWallGate, WallConnector, WallStraight5, WallStraight2
+> > Unfortunately this also means that you will keep spending money if you keep clicking the hotkey.
+
+Another two not so usefull, but at the same time quite useful are:
+
+```c
+map ("o", "game", "uiSetCameraStartLoc()")
+map ("p", "game", "uiShowCameraStartLoc()")
+```
+
+This allows you to create and use a camera location. Akin to camera locations in SC2, except that you can only have one.
+
+You also have the possibility of changing how many units will be added to production
+
+```c
+map ("shift-v", "TownCenterAccel", "tis(\"Settler\",2) tis(\"Coureur\",2)")
+```
+
+In this last example we changed the towncenters shift function from 5 to 2 villagers, although I can't imagine a practical use case for this.
+
+Another more highlevel hotkey is to select and delete Wall pillars to save the 5 wood.
+
+```C
+map ("u", "game", "uiFindIdleType(\"WallConnector\") uiDeleteAllSelectedUnits()")
+```
+
+> Note how we chain two commands. First find WallConnector, and then Delete what we have selected.
+>
+> > Attention: If you have no WallConnectors, and you happen to have other units selected, it will delete them. So be careful.
+
+One last type of hotkeys that we will see will be ones that might be useful when dealing with Random Maps.
+
+```c
+map ("shift-e", "game", "blackmap") //Shows terrain
+map ("shift-r", "game", "fog") //Shows units, uncluding gaia (so also animals, treasures, and native buildings)
+```
+
 ### Alternative UIs
+
+We wont go very far on this topic, but lot's of interesting ones can be found online at [ESOC](https://eso-community.net/viewtopic.php?f=33&t=8594#:~:text=UI%20%3A,UI%0AQazitory%20UI).
+
+We will only focus on one specific effect, transparency.
 
 ### SYSTEM UI Files Troubleshooting
 
@@ -477,7 +609,40 @@ Until now we have seen `USER` files that the game uses to bundle data and `SYSTE
 We are slowly running out of small useless changes that are simple to explain, and custom maps are one of the most requested and saught after features of the game, and community in general.
 Have you ever sat down at the Map Editor and created your own perfect map only to realise you cant play them with your friends? That the ai is broken and doesnt move?
 
-Well, bukle up, because the project will be long, hard, and with a steep incline.
+Well, buckle up, because the project will be long, hard, and with a steep incline.
+
+1. Go to `USER\RM` and create two files: `Tutorial.xs` and `Tutorial.xml`.
+
+The `.xs` file is the one responsible for all the map generation, while the `.xml` is just a tiny file with some ui information. Let's start with the latter one.
+
+```xml
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo
+    detailsText =  "XS Tutorial Custom Map\nDetails in Match Room."
+
+    imagepath  = "ui\random_map\great_plains"
+    displayName = "XS Tutorial Custom Map"
+    cannotReplace = ""
+    loadDetailsText = "XS Tutorial Custom Map.\nDetails while entering the match."
+
+    loadBackground="ui\random_map\great_plains\great_plains_map">
+
+    <loadss>ui\random_map\great_plains\great_plains_ss_03</loadss>
+</mapinfo>
+```
+
+As of now you can already go in game, select Custom Maps, and select your map. Although it will just crash as there is still nothing to load.
+Right now our issue is that the game doesn't know where to start to create our map. For this we will need an entry point.
+
+```c
+
+int main(void) {
+
+}
+
+```
+
+And that's it. Now we can launch our map for the first time.
 
 ### Basics
 
