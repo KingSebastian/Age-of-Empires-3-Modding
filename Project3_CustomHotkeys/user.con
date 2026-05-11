@@ -1,0 +1,18 @@
+map ("g", "game", "uiTransformSelectedUnit(\"CWallGate\")")
+map ("k", "game", "uiTransformSelectedUnit(\"WallConnector\")")
+map ("l", "game", "uiTransformSelectedUnit(\"WallStraight5\")")
+
+map ("shift-mousez", "building", "uiWheelRotatePlacedUnit")
+
+map ("o", "game", "uiSetCameraStartLoc()")
+map ("p", "game", "uiShowCameraStartLoc()")
+
+
+
+
+map ("shift-v", "TownCenterAccel", "tis(\"Settler\",2) tis(\"Coureur\",2)")
+
+map ("u", "game", "uiFindIdleType(\"WallConnector\") uiDeleteAllSelectedUnits()")
+
+map ("shift-e", "game", "blackmap")
+map ("shift-r", "game", "fog")

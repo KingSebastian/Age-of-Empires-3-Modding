@@ -1,0 +1,246 @@
+// hotkeys.con
+//
+////////////////////////////////////
+// Game specific Hotkeys
+////////////////////////////////////
+
+map ("/", "game", "uiFindType(\"Hero\")")
+map ("'", "game", "uiFindType(\"Ship\")")
+map (".", "game", "uiFindIdleType(\"ValidIdleVillager\")")
+map (",", "game", "uiFindIdleType(\"Military\")")
+map (";", "game", "uiFindType(\"AbstractWagon\")")
+map ("space", "game", "uiLookAtSelection")
+map ("h", "game", "toggleHomeCityView")
+map ("t", "game", "uiFindType(\"TownCenter\")")
+
+map ("control-b", "game", "uiFindType(\"Barracks\") uiFindType(\"Blockhouse\")")
+map ("control-c", "game", "uiFindType(\"Church\")")
+map ("control-d", "game", "uiFindType(\"Dock\")")
+map ("control-a", "game", "uiFindType(\"ArtilleryDepot\")")
+map ("control-i", "game", "uiFindType(\"Mill\")")
+map ("control-k", "game", "uiFindType(\"Bank\")")
+map ("control-l", "game", "uiFindType(\"Plantation\")")
+map ("control-m", "game", "uiFindType(\"Market\")")
+map ("control-e", "game", "uiFindType(\"House\") uiFindType(\"HouseEast\") uiFindType(\"HouseMed\") uiFindType(\"Manor\")")
+map ("control-p", "game", "uiFindType(\"TradingPost\")")
+map ("control-q", "game", "uiFindType(\"FieldHospital\")")
+map ("control-r", "game", "uiFindType(\"Arsenal\")")
+map ("control-s", "game", "uiFindType(\"Stable\")")
+map ("control-o", "game", "uiFindType(\"Outpost\")")
+map ("control-v", "game", "uiFindType(\"LivestockPen\")")
+map ("control-w", "game", "uiFindType(\"WallConnector\")")
+map ("control-y", "game", "uiFindType(\"Factory\")")
+map ("control-z", "game", "uiFindType(\"Capitol\")")
+map ("control-f", "game", "uiFindType(\"FortFrontier\")")
+
+////////////////////////////////////
+// Villager builds 
+////////////////////////////////////
+map ("b", "BuildAccel", "tis(\"Barracks\") tis(\"Blockhouse\")")
+map ("c", "BuildAccel", "tis(\"Church\")")
+map ("d", "BuildAccel", "tis(\"Dock\")")
+map ("e", "BuildAccel", "tis(\"TownCenter\")")
+map ("a", "BuildAccel", "tis(\"ArtilleryDepot\")")
+map ("k", "BuildAccel", "tis(\"Bank\")")
+map ("l", "BuildAccel", "tis(\"Plantation\")")
+map ("v", "BuildAccel", "tis(\"LivestockPen\")")
+map ("i", "BuildAccel", "tis(\"Mill\")")
+map ("o", "BuildAccel", "tis(\"Outpost\")")
+map ("e", "BuildAccel", "tis(\"House\") tis(\"HouseEast\") tis(\"HouseMed\") tis(\"Manor\")")
+map ("m", "BuildAccel", "tis(\"Market\")")
+map ("p", "BuildAccel", "tis(\"TradingPost\")")
+map ("q", "BuildAccel", "tis(\"FieldHospital\")")
+map ("r", "BuildAccel", "tis(\"Arsenal\")")
+map ("s", "BuildAccel", "tis(\"Stable\")")
+map ("w", "BuildAccel", "tis(\"WallConnector\")")
+map ("y", "BuildAccel", "tis(\"Factory\")")
+map ("z", "BuildAccel", "tis(\"Capitol\")")
+map ("f", "BuildAccel", "tis(\"FortFrontier\")")
+
+////////////////////////////////////
+// Settlement Accelerators
+////////////////////////////////////
+map ("n", "TownCenterAccel", "uiEjectGarrisonedUnits()")
+map ("v", "TownCenterAccel", "tis(\"Settler\") tis(\"Coureur\")")
+map ("shift-v", "TownCenterAccel", "tis(\"Settler\",5) tis(\"Coureur\",5)")
+map ("e", "TownCenterAccel", "tis(\"Envoy\")")
+map ("shift-e", "TownCenterAccel", "tis(\"Envoy\",5)")
+map ("r", "TownCenterAccel", "tis(\"PetCougar\")")
+map ("shift-r", "TownCenterAccel", "tis(\"PetCougar\",5)")
+
+
+////////////////////////////////////
+// Dock Accelerators
+////////////////////////////////////
+map ("f", "DockAccel", "tis(\"FishingBoat\")")
+map ("shift-f", "DockAccel", "tis(\"FishingBoat\",5)")
+map ("c", "DockAccel", "tis(\"Caravel\")")
+map ("shift-c", "DockAccel", "tis(\"Caravel\",5)")
+map ("g", "DockAccel", "tis(\"Galleon\")")
+map ("shift-g", "DockAccel", "tis(\"Galleon\",5)")
+map ("r", "DockAccel", "tis(\"Frigate\")")
+map ("shift-r", "DockAccel", "tis(\"Frigate\",5)")
+map ("m", "DockAccel", "tis(\"Monitor\")")
+map ("shift-m", "DockAccel", "tis(\"Monitor\",5)")
+map ("y", "DockAccel", "tis(\"Fluyt\")")
+map ("shift-y", "DockAccel", "tis(\"Fluyt\",5)")
+map ("l", "DockAccel", "tis(\"Galley\")")
+map ("shift-l", "DockAccel", "tis(\"Galley\",5)")
+map ("e", "DockAccel", "tis(\"Canoe\")")
+map ("shift-e", "DockAccel", "tis(\"Canoe\",5)")
+
+
+////////////////////////////////////
+// Blockhouse Accelerators
+////////////////////////////////////
+map ("s", "BlockhouseAccel", "tis(\"Strelet\")")
+map ("b", "BlockhouseAccel", "tis(\"Halberdier\")")
+map ("m", "BlockhouseAccel", "tis(\"Musketeer\")")
+map ("shift-s", "BlockhouseAccel", "tis(\"Strelet\",5)")
+map ("shift-b", "BlockhouseAccel", "tis(\"Halberdier\")")
+map ("shift-m", "BlockhouseAccel", "tis(\"Musketeer\")")
+
+
+
+////////////////////////////////////
+// Stable Accelerators
+////////////////////////////////////
+map ("s", "StableAccel", "tis(\"Hussar\")")
+map ("d", "StableAccel", "tis(\"Dragoon\")")
+map ("o", "StableAccel", "tis(\"Oprichnik\")")
+map ("a", "StableAccel", "tis(\"CavalryArcher\")")
+map ("c", "StableAccel", "tis(\"Cuirassier\")")
+map ("r", "StableAccel", "tis(\"Ruyter\")")
+map ("w", "StableAccel", "tis(\"WarWagon\")")
+map ("l", "StableAccel", "tis(\"Lancer\")")
+map ("x", "StableAccel", "tis(\"Cossack\")")
+map ("u", "StableAccel", "tis(\"Uhlan\")")
+
+map ("shift-x", "StableAccel", "tis(\"Cossack\",5)")
+map ("shift-s", "StableAccel", "tis(\"Hussar\",5)")
+map ("shift-d", "StableAccel", "tis(\"Dragoon\",5)")
+map ("shift-o", "StableAccel", "tis(\"Oprichnik\",5)")
+map ("shift-a", "StableAccel", "tis(\"CavalryArcher\",5)")
+map ("shift-c", "StableAccel", "tis(\"Cuirassier\",5)")
+map ("shift-r", "StableAccel", "tis(\"Ruyter\",5)")
+map ("shift-w", "StableAccel", "tis(\"WarWagon\",5)")
+map ("shift-l", "StableAccel", "tis(\"Lancer\",5)")
+map ("shift-u", "StableAccel", "tis(\"Uhlan\",5)")
+
+
+
+////////////////////////////////////
+// Fort Accelerators
+////////////////////////////////////
+//map ("m", "FortFrontierAccel", "tis(\"Musketeer\")")
+//map ("shift-m", "FortFrontierAccel", "tis(\"Musketeer\",5)")
+//map ("f", "FortFrontierAccel", "tis(\"Falconet\")")
+//map ("shift-f", "FortFrontierAccel", "tis(\"Falconet\",5)")
+//map ("c", "FortFrontierAccel", "tis(\"Culverin\")")
+//map ("shift-c", "FortFrontierAccel", "tis(\"Culverin\",5)")
+//map ("t", "FortFrontierAccel", "tis(\"Mortar\")")
+//map ("shift-t", "FortFrontierAccel", "tis(\"Mortar\",5)")
+
+
+
+////////////////////////////////////
+// Barracks Accelerators
+////////////////////////////////////
+map ("x", "BarracksAccel", "tis(\"Crossbowman\")")
+map ("l", "BarracksAccel", "tis(\"Longbowman\")")
+map ("j", "BarracksAccel", "tis(\"Janissary\")")
+map ("p", "BarracksAccel", "tis(\"Pikeman\")")
+map ("b", "BarracksAccel", "tis(\"Halberdier\")")
+map ("m", "BarracksAccel", "tis(\"Musketeer\")")
+map ("s", "BarracksAccel", "tis(\"Skirmisher\")")
+map ("r", "BarracksAccel", "tis(\"Rodelero\")")
+map ("e", "BarracksAccel", "tis(\"Cacadore\")")
+map ("d", "BarracksAccel", "tis(\"Dopplesoldner\")")
+
+map ("shift-x", "BarracksAccel", "tis(\"Crossbowman\",5)")
+map ("shift-l", "BarracksAccel", "tis(\"Longbowman\",5)")
+map ("shift-j", "BarracksAccel", "tis(\"Janissary\",5)")
+map ("shift-p", "BarracksAccel", "tis(\"Pikeman\",5)")
+map ("shift-b", "BarracksAccel", "tis(\"Halberdier\",5)")
+map ("shift-m", "BarracksAccel", "tis(\"Musketeer\",5)")
+map ("shift-s", "BarracksAccel", "tis(\"Skirmisher\",5)")
+map ("shift-r", "BarracksAccel", "tis(\"Rodelero\",5)")
+map ("shift-e", "BarracksAccel", "tis(\"Cacadore\",5)")
+map ("shift-d", "BarracksAccel", "tis(\"Dopplesoldner\",5)")
+
+
+////////////////////////////////////
+// Artillery Depot Accelerators
+////////////////////////////////////
+map ("f", "ArtilleryDepotAccel", "tis(\"Falconet\")")
+map ("shift-f", "ArtilleryDepotAccel", "tis(\"Falconet\",5)")
+map ("c", "ArtilleryDepotAccel", "tis(\"Culverin\")")
+map ("shift-c", "ArtilleryDepotAccel", "tis(\"Culverin\",5)")
+map ("m", "ArtilleryDepotAccel", "tis(\"Mortar\")")
+map ("shift-m", "ArtilleryDepotAccel", "tis(\"Mortar\",5)")
+map ("g", "ArtilleryDepotAccel", "tis(\"Grenadier\")")
+map ("shift-g", "ArtilleryDepotAccel", "tis(\"Grenadier\",5)")
+map ("o", "ArtilleryDepotAccel", "tis(\"OrganGun\")")
+map ("shift-o", "ArtilleryDepotAccel", "tis(\"OrganGun\",5)")
+map ("b", "ArtilleryDepotAccel", "tis(\"AbusGun\")")
+map ("shift-b", "ArtilleryDepotAccel", "tis(\"AbusGun\",5)")
+
+
+////////////////////////////////////
+// Church Accelerators
+////////////////////////////////////
+map ("m", "ChurchAccel", "tis(\"Missionary\")")
+map ("shift-m", "ChurchAccel", "tis(\"Missionary\",5)")
+map ("p", "ChurchAccel", "tis(\"Priest\")")
+map ("shift-p", "ChurchAccel", "tis(\"Priest\",5)")
+map ("i", "ChurchAccel", "tis(\"Imam\")")
+map ("shift-i", "ChurchAccel", "tis(\"Imam\",5)")
+
+////////////////////////////////////
+// Livestock Pen Accelerators
+////////////////////////////////////
+map ("s", "LivestockPenAccel", "tis(\"Sheep\")")
+map ("shift-s", "LivestockPenAccel", "tis(\"Sheep\",5)")
+
+
+////////////////////////////////////
+// Trading Post Accelerators
+////////////////////////////////////
+map ("r", "TradingPostAccel", "tis(\"NatAxeRider\")")
+map ("shift-r", "TradingPostAccel", "tis(\"NatAxeRider\",5)")
+map ("d", "TradingPostAccel", "tis(\"NatAxeRiderDogSoldier\")")
+map ("shift-d", "TradingPostAccel", "tis(\"NatAxeRiderDogSoldier\",5)")
+map ("b", "TradingPostAccel", "tis(\"NatBlackwoodArcher\")")
+map ("shift-b", "TradingPostAccel", "tis(\"NatBlackwoodArcher\",5)")
+map ("g", "TradingPostAccel", "tis(\"NatBlowgunWarrior\")")
+map ("shift-g", "TradingPostAccel", "tis(\"NatBlowgunWarrior\",5)")
+map ("w", "TradingPostAccel", "tis(\"NatBolasWarrior\")")
+map ("shift-w", "TradingPostAccel", "tis(\"NatBolasWarrior\",5)")
+map ("c", "TradingPostAccel", "tis(\"NatClubman\")")
+map ("shift-c", "TradingPostAccel", "tis(\"NatClubman\",5)")
+map ("e", "TradingPostAccel", "tis(\"NatEagleWarrior\")")
+map ("shift-e", "TradingPostAccel", "tis(\"NatEagleWarrior\",5)")
+map ("s", "TradingPostAccel", "tis(\"NatHolcanSpearman\")")
+map ("shift-s", "TradingPostAccel", "tis(\"NatHolcanSpearman\",5)")
+map ("n", "TradingPostAccel", "tis(\"NatHuaminca\")")
+map ("shift-n", "TradingPostAccel", "tis(\"NatHuaminca\",5)")
+map ("j", "TradingPostAccel", "tis(\"NatJaguarWarrior\")")
+map ("shift-j", "TradingPostAccel", "tis(\"NatJaguarWarrior\",5)")
+map ("p", "TradingPostAccel", "tis(\"NatMedicineMan\")")
+map ("shift-p", "TradingPostAccel", "tis(\"NatMedicineMan\",5)")
+map ("m", "TradingPostAccel", "tis(\"NatMantlet\")")
+map ("shift-m", "TradingPostAccel", "tis(\"NatMantlet\",5)")
+map ("f", "TradingPostAccel", "tis(\"NatRifleman\")")
+map ("shift-f", "TradingPostAccel", "tis(\"NatRifleman\",5)")
+map ("o", "TradingPostAccel", "tis(\"NatSharktoothBowman\")")
+map ("shift-o", "TradingPostAccel", "tis(\"NatSharktoothBowman\",5)")
+map ("x", "TradingPostAccel", "tis(\"NatTomahawk\")")
+map ("shift-x", "TradingPostAccel", "tis(\"NatTomahawk\",5)")
+map ("e", "TradingPostAccel", "tis(\"NatHorseArcher\")")
+map ("shift-e", "TradingPostAccel", "tis(\"NatHorseArcher\",5)")
+map ("k", "TradingPostAccel", "tis(\"NatTracker\")")
+map ("shift-k", "TradingPostAccel", "tis(\"NatTracker\",5)")
+map ("u", "TradingPostAccel", "tis(\"CoureurCree\")")
+map ("shift-u", "TradingPostAccel", "tis(\"CoureurCree\",5)")
+
+
