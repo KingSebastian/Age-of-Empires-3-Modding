@@ -1,11 +1,20 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <mapinfo
+<<<<<<< HEAD
     detailsText =  "XS Tutorial Custom Map\nDetails in Match Room."
 
     imagepath  = "ui\random_map\great_plains"
     displayName = "XS Tutorial Custom Map"
     cannotReplace = ""
     loadDetailsText = "XS Tutorial Custom Map.\nDetails while entering the match."
+=======
+    detailsText =  "XS Tutorial Empty Map\nDetails in Match Room."
+
+    imagepath  = "ui\random_map\great_plains"
+    displayName = "XS Tutorial Empty Map"
+    cannotReplace = ""
+    loadDetailsText = "XS Tutorial Empty Map.\nDetails while entering the match.\nThis map is completely empty (Only has a ground)."
+>>>>>>> 016d1b7
 
     loadBackground="ui\random_map\great_plains\great_plains_map">
 

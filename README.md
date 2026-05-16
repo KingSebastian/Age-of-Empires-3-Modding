@@ -1,6 +1,6 @@
 # Age of Empires 3 Modding
 
-In this repo we explore a variety of modding concepts from Age of Empires 3 (Vanilla and The Asian Dynasties).
+In this repo, we explore a variety of modding concepts from Age of Empires 3 (Vanilla and The Asian Dynasties).
 
 Main topics include:
 
@@ -67,13 +67,13 @@ Here are some useful places to learn more:
   Allows loading mods without modifying the base game files
 
 - [AoEed](https://aoe3.heavengames.com/cgi-bin/forums/display.cgi?action=st&fn=1&tn=23622)
-  Older alternative to `Resource Manger`
+  An older alternative to `Resource Manager`.
 
 ---
 
 ## Getting Started
 
-This game assumes that you have booted up the game at least once, and completed a match. Some minor file deviations might appear if you have never started the game before.
+This guide assumes that you have booted up the game at least once and completed a match. Some minor file deviations might appear if you have never started the game before.
 
 Age of Empires 3 stores files in two main locations:
 
@@ -89,7 +89,7 @@ Age of Empires 3 stores files in two main locations:
 These two places serve two different purposes. `SYSTEM` files are used to define data that will be loaded at start. `USER` files are used to bundle, group, and keep track of some of that data, including being rewritten by the game. This makes it so that `USER` files are generally safe to edit, as their loss only leads to loss of progress or user configs. `SYSTEM` files, on the other hand, can cause version mismatches or completely break the game, so we will mostly limit changes there. You are also hereby strongly advised to only change files you have read about before.
 
 **AND REMEMBER: ALWAYS BACK-UP EVERYTHING YOU TOUCH!**
-_And if you go real deep, use a version manager like Git._
+_And if you go really deep, use a version manager like Git._
 
 ---
 
@@ -116,17 +116,17 @@ Having in mind the previously defined `USER` folder as root, we would expect a t
 
 _Note: The `{2,3}` is used to simplify the presence of the expansions._
 
-Of all these folders, some will be of higher importance to us than others, in particular the `RM` and `Savegame` folders. However I will still briefly walk over each one, and explaining their usefulness. Feel free to skip to the [first mini project](#editing-home-city-level-and-more).
+Of all these folders, some will be of higher importance to us than others, in particular the `RM` and `Savegame` folders. However, I will still briefly walk over each one and explain its usefulness. Feel free to skip to the [first mini project](#editing-home-city-level-and-more).
 
 ### USER Files structure
 
 #### AI
 
-Perhaps from the name of this folder we already have an idea of what is going on. And if we open it up we will find exactly that. A bunch of personality files (secretly `xml`) that define an AI player profile, including its civilization, behavior settings, and a record of past matches (such as units built, outcomes, and player relationships), which the game uses to influence AI chats.
+Perhaps from the name of this folder, we already have an idea of what is going on. And if we open it up, we will find exactly that. A bunch of personality files (secretly `xml`) that define an AI player profile, including its civilization, behavior settings, and a record of past matches (such as units built, outcomes, and player relationships), which the game uses to influence AI chats.
 
 #### campaign
 
-The name is somewhat self explanatory, but it only keeps track of decks used at each campaign. It does not keep track of current mission, or max mission, or even difficulty.
+The name is somewhat self-explanatory, but it only keeps track of decks used at each campaign. It does not keep track of the current mission, the max mission, or even difficulty.
 
 #### Data
 
@@ -134,28 +134,28 @@ Seems to be a dead folder, just mirroring what the `SYSTEM\data\` does
 
 #### HomeCities
 
-This is, unfortunately, a red herring. Developers seem to have intended this folder to hold on to the homecities, but this is not the case. The actual home cities are in `USER\Savegame\`.
+This is, unfortunately, a red herring. Developers seem to have intended this folder to hold on to the home cities, but this is not the case. The actual home cities are in `USER\Savegame\`.
 
 #### RM{2,3}
 
-RM stands for Random Maps, and it's simply the place where you can place your custom maps. It also works as place for the game to drop map dumps into.
+RM stands for Random Maps, and it's simply the place where you can place your custom maps. It also works as a place for the game to drop map dumps into.
 
 #### Savegame
 
-Probably the most important folder, at least of us. Keeps the files regarding Homecities, Savegames, and Recordings
+Probably the most important folder, at least for us. Keeps the files regarding Homecities, Savegames, and Recordings
 
-\_Side Note: The games records games as `Record Game {1-9}.age3rec`, by constantly pushing them up and saving the new one as 1. This unfortunately means that old recordings get deleted.
+\_Side Note: The game records games as `Record Game {1-9}.age3rec`, by constantly pushing them up and saving the new one as 1. This unfortunately means that old recordings get deleted.
 
-The recordings can only be watched inside the game, and they should not be edited. There are a couple of other tools that can analyse recordings, to see who played, who won, which map was played, civilizations.
+The recordings can only be watched inside the game, and they should not be edited. There are a couple of other tools that can analyse recordings to see who played, who won, which map was played, and which civilizations.
 Likewise, I wouldn’t recommend touching the savegames, denoted as `.age3sav` files, unless you intend to paste someone else's files into your folder, or delete some of yours.
 
 The homecity files can be edited heavily and easily. And it will be the subject of our first project, still inside this `USER` files module.
 
-> Note: In general we will only be editing `.xlm` or `.xs` (similar to C) files.
+> Note: In general, we will only be editing `.xlm` or `.xs` (similar to C) files.
 
 #### Scenario
 
-Contains your custom scenarios. You can add or delete them from there, but to edit them use the in-game `Scenario Editor`.
+Contains your custom scenarios. You can add or delete them from there, but to edit them, use the in-game `Scenario Editor`.
 
 #### Screenshots
 
@@ -163,19 +163,21 @@ Self explanatory.
 
 #### Startup
 
+The `Startup` folder can contain both `.con` and `.cfg` files. The first ones are used to define custom hotkeys, and the latter serve to define launch flags, like no intro cinematics or developer mode.
+
 #### Trigger{2,3}
 
-They are for temporary purposes only and contain usually merely the file "trigtemp.xs". This file is always generated at game start if triggers are used. It contains the XS source code of the trigger functions (XS is a programming/scripting language very similar to C language).
+They are for temporary purposes only and usually contain merely the file "trigtemp.xs". This file is always generated at game start if triggers are used. It contains the XS source code of the trigger functions (XS is a programming/scripting language very similar to the C language).
 
 It's sometimes useful for map/scenario developers to debug trigger problems.
 
 #### Users{2,3}
 
-Also very important folders, as they contain your profile. This keeps track of various things like settings, campaign progress, hotkeys.
+Also, very important folders, as they contain your profile. This keeps track of various things like settings, campaign progress, and hotkeys.
 
 ### Editing Home City Level (and More)
 
-Home Cities despite being one of the defining features of Age of Empires 3, as they add a strategic layer through shipments, decks, and progression, start in a quite limited state. Their low level blocks you from unlocking quite a lot of cards, and also reduces your possible age up politicians. And to make it worse, they are quite slow to level up.
+Home Cities, despite being one of the defining features of Age of Empires 3, as they add a strategic layer through shipments, decks, and progression, start in a quite limited state. Their low-level blocks you from unlocking quite a lot of cards, and also reduces your possible age-up politicians. And to make it worse, they are quite slow to level up.
 
 So ff you've found a deck online and want to unlock the required cards, this is where to start.
 
@@ -195,7 +197,7 @@ First navigate to: `<USER>\Savegame\`
 
 Find your file: `sp_<NAME_OF_YOUR_CITY>_homecity.xml`
 
-This file contains various informations like:
+This file contains various information, such as:
 
 - Civilization
 - Homecity (Difference to civilization will be explained later)
@@ -231,22 +233,22 @@ _Note: In The Asian Dynasties, Home Cities start at level 10, but you can still 
 After saving the file and launching the game:
 
 - Your Home City will be level 131
-- All cards will be unlockable (but yet unlocked)
+- All cards will be unlockable (but not yet unlocked)
 
 #### Understanding the file
 
-I told you a couple of things that this file stores before, but let's locate them, and understand them better.
+I told you a couple of things that this file stores before, but let's locate them and understand them better.
 
 ```xml
 <!-- These are regarding the Home City / Shipment mechanics -->
-<defaultdirectoryid>0</defaultdirectoryid>              <!-- Where the game can find the file bellow 0 is root, 2 is campaigns. -->
+<defaultdirectoryid>0</defaultdirectoryid>              <!-- Where the game can find the file below 0 is root, 2 is campaigns. -->
 <defaultfilename>homecityfrench.xml</defaultfilename>   <!-- Homecity to load (Controls shipments, decks, homecity cosmetics) -->
 
 <!-- These are for in-game civilization -->
 <civ>French</civ>
-<!-- Changing this lets you mix civilizations and shipment sets (e.g. British civ with French shipments).
-     This can cause missing or phantom cards, broken shipments (e.g. banks can't be built),
-     and in some cases may crash the game. -->
+<!-- Changing this lets you mix civilizations and shipment sets (e.g., British civ with French shipments).
+     This can cause missing or phantom cards, broken shipments (e.g., banks can't be built),
+     and, in some cases, may crash the game. -->
 
 
 <!-- Most of the following have no real importance to us -->
@@ -259,22 +261,22 @@ I told you a couple of things that this file stores before, but let's locate the
 <respec>1</respec>
 <level>131</level>  <!-- Your level, usually lvl40 is minimum to unlock all good age up politicians -->
 <xp>11533173</xp>
-<skillpoints>131</skillpoints>  <!-- Available skill points (If you havent yet unlocked anything, you will need around 130) -->
+<skillpoints>131</skillpoints>  <!-- Available skill points (If you haven't yet unlocked anything, you will need around 130) -->
 <xppercentage>2.190247</xppercentage>
 <numpropunlocksearned>0</numpropunlocksearned>
 ```
 
 > _Note: If you want to experiment with strong combinations, pairing the Spanish civ (faster shipments) with the German Home City (powerful shipments) is a particularly strong option._
 
-> _Side note: Definitely expect other players to call you hacker since you will have units not normally available to your civ._
+> _Side note: Definitely expect other players to call you a hacker since you will have units not normally available to your civ._
 
 ### Unlocking Hidden Civilizations
 
-Hopefully you were able to complete the previous Project without issues, if not you can go back and retry, look for help in the [USER files troubleshooting](#user-files-troubleshooting) section, or get the files provided by this [guide](./Project1_Homecities/BaseGame/).
+Hopefully, you were able to complete the previous Project without issues. You can go back and retry, look for help in the [USER files troubleshooting](#user-files-troubleshooting) section, or get the files provided by this [guide](./Project1_Homecities/BaseGame/).
 Now, let's move on and make a couple more bold changes for the second part of our first project.
-Will use the same type of Homecity files that we just used in part 1, to unlock the campaign and hidden civilizations for single- and multiplayer games.
+Will use the same type of Homecity files that we just used in part 1 to unlock the campaign and hidden civilizations for single- and multiplayer games.
 
-1. Create a new Homecity, by simply copying a homecity file into the same folder and rename it to `sp_Malta_homecity.xlm`.
+1. Create a new Homecity by simply copying a homecity file into the same folder and renaming it to `sp_Malta_homecity.xml`.
 2. Open it up, and change the following fields:
 
 ```xml
@@ -284,12 +286,12 @@ Will use the same type of Homecity files that we just used in part 1, to unlock 
 <name>Malta</name>
 ```
 
-3. Start the game and unlock all new available cards and create a new deck. (Don't use an existing one, it will leave you with invisible cards.)
+3. Start the game, unlock all new available cards, and create a new deck. (Don't use an existing one; it will leave you with invisible cards.)
 4. Enjoy a game!
 
-Now, where does this weird `homecitySPCAct1.xml` name come from? And why does it have this `blood ice steel\` prefix? And even weirder for the first time `defaultdirectoryid` is not 0, but 3? And how does this change our nation into the campaign Malta civilization?
+Now, where does this weird `homecitySPCAct1.xml` name come from? And why does it have this `blood ice steel\` prefix? And even weirder, for the first time, `defaultdirectoryid` is not 0, but 3? And how does this change our nation into the campaign Malta civilization?
 
-All of those questions can be answered in detailed with `Resource Manager` and going through the `SYSTEM\data\Data.bar` file, but for now I'll only touch this topic briefly. I'll later explain how, and why this sort of black magic works, but until now i'll just leave the solution.
+All of those questions can be answered in detail with `Resource Manager` and going through the `SYSTEM\data\Data.bar` file, but for now, I'll only touch on this topic briefly. I'll later explain how and why this sort of black magic works, but until now, I'll just leave the solution.
 
 ```txt
 # Vanilla
@@ -324,7 +326,7 @@ homecitySPC_IC:SPCIndians
 homecitySPC_JC:SPCJapaneseEnemy
 homecitybritish:SPCCompany
 
-# Extra Note: You could mix civilizations with other homecities, for example homecitygermans:Spanish, gives you a fast shipment nation, with a strong shipment homecity.
+# Extra Note: You could mix civilizations with other home cities, for example, homecitygermans:Spanish, gives you a fast shipment nation, with a strong shipment homecity.
 ```
 
 Or see it [here](/Age-of-Empires-3-Modding/Project1_Homecities/homecities_info.txt)
@@ -337,7 +339,7 @@ How to use this:
 <civ>SECOND_STRING</civ>
 ```
 
-So, for USA we would have:
+So, for the USA, we would have:
 
 ```xml
 <defaultdirectoryid>3</defaultdirectoryid>
@@ -353,7 +355,7 @@ While TheCircle would look something like this:
 <civ>TheCircle</civ>
 ```
 
-_Note that some `unique` civs use the homecitybritish, unfortunately this causes the game to replace the civ value with British. You will have to manually change it back after each use._
+_Note that some `unique` civs use the homecitybritish; this causes the game to replace the civ value with British. You will have to manually change it back after each use_
 
 ---
 
@@ -363,13 +365,13 @@ Good news: all required Home City files are already included with the game, so t
 
 Bad news: other players may still see this as unintended or unfair and call it cheating.
 
-If that happens, you can point out that this has been done before—for example by pro player Aizamk on the now-defunct ESO servers: [Aizamk Makes America Great Again: USA Civ on TAD!?](https://www.youtube.com/watch?v=imr5uM83Rvs)
+If that happens, you can point out that this has been done before—for example, by pro player Aizamk on the now-defunct ESO servers: [Aizamk Makes America Great Again: USA Civ on TAD!?](https://www.youtube.com/watch?v=imr5uM83Rvs)
 
 ### USER Files Troubleshooting
 
 #### Changes not appearing
 
-- Reselect the homecity
+- Reselect the home city
 - Make sure file starts with `sp_` and ends with `.xml`
 - Make sure you edited the correct file
 - Verify the file is in the correct folder
@@ -381,44 +383,44 @@ If that happens, you can point out that this has been done before—for example 
 
 #### Missing or broken cards
 
-- Likely caused by mismatched civ and Home City, delete deck and create a new one
+- Likely caused by a mismatched civ and Home City, delete the deck and create a new one
 
 #### Game crashes on startup
 
-- Is not related to our changes, game simply ignores badly formed USER files. Make sure you haven't changes anything else, particularly that you aren't changing `SYSTEM` files.
+- Is not related to our changes; the game simply ignores badly formed USER files. Make sure you haven't changed anything else, particularly that you aren't changing `SYSTEM` files.
 
 #### Settings/Hotkeys gone
 
-- Settings/Hotkeys do not transfer between Expansions. Make sure your on the correct one.
+- Settings/Hotkeys do not transfer between Expansions. Make sure you're on the correct one.
 - Your `USER\Users\NewProfile.xml` seems to have reset. It's recommended to always have a backup of this file, as setting up hotkeys is tedious.
 
 ### Last Remark
 
 Before we move on to the next Project, if you are stuck with your homecities consider deleting the file. Deleting `USER` Files is safe, as in it won't destroy the game, but it will delete that piece of content/knowledge.
 
-In example, if you delete your Profile, and do not have a backup, you will also lose all your hotkeys.
+For example, if you delete your Profile and do not have a backup, you will also lose all your hotkeys.
 
 ## SYSTEM UI Files
 
 Let's play a bit with the SYSTEM files now.
 
-<span style="color:yellow">WARNING: Whenever you hear SYSTEM files, your mind should immediately jump to "BACKUP!". A single mistake could ruin your game. And you will do them.</span>
+<span style="color:red">WARNING: Whenever you hear SYSTEM files, your mind should immediately jump to "BACKUP!". A single mistake could ruin your game. And you will do them.</span>
 
 Now that I scared you a little bit, I can come clean and tell you that it's not always true, but please don't trust your gut.
 
-Age of Empires 3 main files are in `.bar` files, like `SYSTEM\data\Data.bar`. These files can be open with Resource Manager, alternatively with aoe3ed, but we will look further into that in the future. For now, I'll give you the relevant file.
+Age of Empires 3 main files are in `.bar` files, like `SYSTEM\data\Data.bar`. These files can be opened with Resource Manager, alternatively with aoe3ed, but we will look further into that in the future. For now, I'll give you the relevant file.
 
-The `SYSTEM` Files come in two big groups. `UI` files, and `Data` files. The boundary is not exactly clear, but a rule of thumb `UI` files are those who define visual things only, while `Data` ones can be mixed.
+The `SYSTEM` Files come in two big groups. `UI` files, and `Data` files. The boundary is not exactly clear, but a rule of thumb is that `UI` files are those that define visual things only, while `Data` ones can be mixed.
 
-Now, why are we even differentiating between the two of them? Well, `Data` files contribute to the checksum at game start, while the `UI` ones don't. In practical terms, this means that if you change a `UI` file you will still be able to play with other players without compatibility problems, but if you try to do the same, but with a `Data` file, it will fail (CRC error), as for all practical purposes, you are playing a different game version/mod.
+Now, why are we even differentiating between the two of them? Well, `Data` files contribute to the checksum at game start, while the `UI` ones don't. In practical terms, this means that if you change a `UI` file, you will still be able to play with other players without compatibility problems, but if you try to do the same with a `Data` file, it will fail (CRC error), as for all practical purposes, you are playing a different game version/mod.
 
 Also, take into mind that while USER files get hotloaded, SYSTEM files are read once at game start. Any change to the files means the game needs to be restarted.
 
 ### Editing Player Colors
 
-The `playercolors.xml` is, by default, read from the previously mentioned `.bar` file, but AoE3, allows you to replace these ones with a SYSTEM file mirroring the original one's location, which for our file is `SYSTEM\data\`.
+The `playercolors.xml` is, by default, read from the previously mentioned `.bar` file, but AoE3 allows you to replace these ones with a SYSTEM file mirroring the original one's location, which for our file is `SYSTEM\data\`.
 
-_Side Task: If you wish to see the effect, you can try and create an empty `SYSTEM\data\playercolors.xml` file and boot up the game. You will see all colors defaulting to white._
+_Side Task: If you wish to see the effect, you can try to create an empty `SYSTEM\data\playercolors.xml` file and boot up the game. You will see all colors defaulting to white._
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -448,17 +450,17 @@ _See, and get, the full file here: [playercolors.xml](./Project2_PlayerColors/pl
 
 The file itself, like the homecities before, is written in `.xml`.
 
-There are two main parts. PlayerX*color, and the \_friend or foe* colors. The first are `0: Mother Nature`, `1-8: Normal Players` and `9-12: Mostly for scenarios`. As for the _friend or foe_, they are the more commonly known team colors, usually blue, yellow and red, for self, allies, and enemies respectively.
+There are two main parts. PlayerX*color, and the \_friend or foe* colors. The first are `0: Mother Nature`, `1-8: Normal Players` and `9-12: Mostly for scenarios`. As for the _friend or foe_, they are the more commonly known team colors, usually blue, yellow, and red, for self, allies, and enemies, respectively.
 
-> Side Note: If you intend to play multiplayer, having color too different from the original can lead to confusing communication regarding colors.
+> Side Note: If you intend to play multiplayer, having colors too different from the original can lead to confusing communication regarding colors.
 
 ### New Hotkeys
 
-This Project will be rather small, as there aren't many interesting extra hotkey options, at least in the base game, which is the one we will be using here. However, there can be some specific ones like loading a save game, recorded game or even a scenario.
+This Project will be rather small, as there aren't many interesting extra hotkey options, at least in the base game, which is the one we will be using here. However, there can be some specific ones, like loading a save game, a recorded game, or even a scenario.
 
-Hotkeys are also a little bit special, as one can add them to both `USER` or `SYSTEM` files without any issues. Most often, when you write a file, it will replace the `SYSTEM` equivalent, but for configuration files, it's slightly different. Instead of overriding, they append.
+Hotkeys are also a little bit special, as one can add them to both `USER` and `SYSTEM` files without any issues. Most often, when you write a file, it will replace the `SYSTEM` equivalent, but for configuration files, it's slightly different. Instead of overriding, they append.
 
-Im introducing this project at this point also because it will allow me to introduce you to one of Age of Empires design features. In this game, everything is driven by commands sent to the engine. Essentially, every action the game takes, whether it’s moving a unit, updating the interface, or executing AI behavior, is triggered by a command. Most commands can be grouped, by their starting prefix, into the following categories:
+I'm introducing this project at this point also because it will allow me to introduce you to one of the Age of Empires design features. In this game, everything is driven by commands sent to the engine. Essentially, every action the game takes, whether it’s moving a unit, updating the interface, or executing AI behavior, is triggered by a command. Most commands can be grouped, by their starting prefix, into the following categories:
 
 - **XS** – Custom commands created for specific behaviors or modding purposes.
 - **KB** – Knowledge-base related commands.
@@ -476,9 +478,9 @@ But there are some other smaller categories, namely:
 
 A few even more obscure groups like `edit`, `move`, `render` and `toggle`, and obviously some extra miscellaneous, like `player`, `fog`, `blackmap`.
 
-> We will look in depth into some of them in later projects. Meanwhile if you just wish to see all commands, or explore them a bit, head on over to this [Language Server Protocol]() Project.
+> We will look in depth into some of them in later projects. Meanwhile, if you just wish to see all commands, or explore them a bit, head on over to this [Language Server Protocol]() Project.
 
-Back to the hotkeys, let's start analising the `SYSTEM\Startup\hotkeys.con` file.
+Back to the hotkeys, let's start analyzing the `SYSTEM\Startup\hotkeys.con` file.
 
 > Note that although our work here will be rather small, there is quite a lot to grasp and learn. So don't feel overwhelmed.
 
@@ -503,7 +505,7 @@ map (<key>, "game", <command>)
 
 And we would be already mostly there. The only thing we could add is that "game" isn't just a constant, but it's actually the context.
 
-Afaik there are the following main contexts:
+Afaik, there are the following main contexts:
 
 - root (Everywhere)
 - game (Single- or Multi Player match)
@@ -511,9 +513,9 @@ Afaik there are the following main contexts:
 - world (game + scenario)
 - xxxAccel (simulates a mouse click on that button for that context)
 
-and lots of other smaller niche ones: `cinematic`, `xsdebugger`, `tributedialog`, `playerComms`, `attackMove`, `flare`, `repair`, well you can follow the file and see many others.
+and lots of other smaller niche ones: `cinematic`, `xsdebugger`, `tributedialog`, `playerComms`, `attackMove`, `flare`, `repair`, well, you can follow the file and see many others.
 
-Regardless, a context, is a state that controls stuff like allowed commands, ui, mouse pointer, music. Everything in AoE3 is connected to a context.
+Regardless, a context is a state that controls stuff like allowed commands, ui, mouse pointer, and music. Everything in AoE3 is connected to a context.
 
 It's also crucial to point out two other things. Strings need to be properly escaped , and you can chain commands.
 Example of both on line 16:
@@ -523,7 +525,7 @@ map ("control-b", "game", "uiFindType(\"Barracks\") uiFindType(\"Blockhouse\")")
 ```
 
 Finally, we can start having some fun.
-Let's start with two of the most common requested hotkeys: , and Wall to Game hotkey.
+Let's start with two of the most commonly requested hotkeys: Building Rotator and Wall to Gate hotkey.
 
 Building Rotator
 
@@ -537,33 +539,41 @@ and Wall to Gate hotkey.
 map ("g", "game", "uiTransformSelectedUnit(\"CWallGate\")")
 ```
 
-Notice how in the first one our context is not `game`, but `building`. So when we are "building" and then use "shift-mousez" (Mouse Wheel Rotation) it will call the `uiWheelRotatePlacedUnit` engine command, that will then rotate the building.
+Notice how in the first one, our context is not `game`, but `building`. So when we are "building" and then use "shift-mousez" (Mouse Wheel Rotation), it will call the `uiWheelRotatePlacedUnit` engine command, that will then rotate the building.
 
 > When a command is a simple function, with no arguments, we can omit the ()
 
-On the second hotkey we are back to our "game" context, and in this case we use a special command `uiTransformSelectedUnit`, why do I say special? Because in this case the game will try to apply this command to anyhing selected, but it will only work on Wall types, as they are the only ones with the ability to transform into games.
+On the second hotkey, we are back to our "game" context, and in this case, we use a special command `uiTransformSelectedUnit`. Why do I say special? Because in this case, the game will try to apply this command to anything selected, but it will only work on Wall types, as they are the only ones with the ability to transform into games.
 
 > I did say wall types, as the game allows you to convert any wall piece into a game, including connectors, and 1x2 pieces. Even more noteworthy is that the process is repeatable and reversible. All 4 types of walls can transform into all other four types of walls.
 >
 > > CWallGate, WallConnector, WallStraight5, WallStraight2
-> > Unfortunately this also means that you will keep spending money if you keep clicking the hotkey.
+> > Unfortunately, this also means that you will keep spending money if you keep clicking the hotkey.
 
-Another two not so usefull, but at the same time quite useful are:
+Another two, not so useful, but at the same time quite useful, are:
 
 ```c
 map ("o", "game", "uiSetCameraStartLoc()")
 map ("p", "game", "uiShowCameraStartLoc()")
 ```
 
-This allows you to create and use a camera location. Akin to camera locations in SC2, except that you can only have one.
+This allows you to create and use a camera location. Akin to camera locations in `StarCrat2`, except that you can only have one.
 
-You also have the possibility of changing how many units will be added to production
+You also have the possibility of changing how many units will be added to production.
 
 ```c
 map ("shift-v", "TownCenterAccel", "tis(\"Settler\",2) tis(\"Coureur\",2)")
 ```
 
-In this last example we changed the towncenters shift function from 5 to 2 villagers, although I can't imagine a practical use case for this.
+In this last example, we changed the town center's shift function from 5 to 2 villagers, although I can't imagine a practical use case for this.
+
+Some hotkeys are quite useful at high-level gameplay.
+
+```c
+map ("shift-y", "game", "unitSetTactic(\"Melee\")") //Switch units to melee (A bit bugged on UI)
+map ("shift-k", "game", "repairUnit(-1)") // Auto repair buildings
+map ("shift-d", "game", "ransomExplorer") // Ransom the explorer back
+```
 
 Another higher-level hotkey is to select and delete the wall pillars to save the 5 wood.
 
@@ -571,7 +581,7 @@ Another higher-level hotkey is to select and delete the wall pillars to save the
 map ("u", "game", "uiFindIdleType(\"WallConnector\") uiDeleteAllSelectedUnits()")
 ```
 
-> Note how we chain two commands. First find WallConnector, and then Delete what we have selected.
+> Note how we chain two commands. First, find WallConnector, and then delete what we have selected.
 >
 > > Attention: If you have no WallConnectors, and you happen to have other units selected, it will delete them. So be careful.
 
@@ -584,7 +594,7 @@ map ("shift-r", "game", "fog") //Shows units, including Gaia (so also animals, t
 
 ### Alternative UIs
 
-We wont go very far on this topic, but lots of interesting ones can be found online at [ESOC](https://eso-community.net/viewtopic.php?f=33&t=8594#:~:text=UI%20%3A,UI%0AQazitory%20UI).
+We won't go very far on this topic, but lots of interesting ones can be found online at [ESOC](https://eso-community.net/viewtopic.php?f=33&t=8594#:~:text=UI%20%3A,UI%0AQazitory%20UI).
 
 We will only focus on one specific effect, transparency.
 
@@ -597,12 +607,12 @@ We will only focus on one specific effect, transparency.
 ### Editing Units (Intro)
 
 This will be our last small tutorial project.
-Until now we have seen `USER` files that the game uses to bundle data and `SYSTEM` files used to control UI aspects. This time, we will look at small tweaks to some units
+Until now, we have seen `USER` files that the game uses to bundle data and `SYSTEM` files used to control UI aspects. This time, we will look at small tweaks to some units.
 
 ## XS Scripting (Custom Maps)
 
-We are slowly running out of small useless changes that are simple to explain, and custom maps are one of the most requested and sought after features of the game, and community in general.
-Have you ever sat down at the Map Editor and created your own perfect map only to realise you can’t play them with your friends? Is the ai broken and doesn't move?
+We are slowly running out of small, useless changes that are simple to explain, and custom maps are one of the most requested and sought-after features of the game, and the community in general.
+Have you ever sat down at the Map Editor and created your own perfect map only to realise you can’t play them with your friends? Is the AI broken and doesn't move?
 
 Well, buckle up, because the project will be long, hard, and with a steep incline.
 
@@ -626,8 +636,8 @@ The `.xs` file is the one responsible for all the map generation, while the `.xm
 </mapinfo>
 ```
 
-As of now you can already go in game, select Custom Maps, and select your map. Although it will just crash as there is still nothing to load.
-Right now our issue is that the game doesn't know where to start creating our map. For this we will need an entry point.
+As of now, you can already go in-game, select Custom Maps, and select your map. Although it will just crash, as there is still nothing to load.
+Right now, our issue is that the game doesn't know where to start creating our map. For this, we will need an entry point.
 
 ```c
 
@@ -639,35 +649,60 @@ int main(void) {
 
 And that's it. Now we can launch our map for the first time.
 
-> Side Note: You could make a file with a different function like, `silver` instead of `main`, and the game would start to launch it, but it would be loading forever, as it can't resolve the entry point.
+> Side Note: You could make a file with a different function, `silver` instead of `main`, and the game would start to launch it, but it would be loading forever, as it can't resolve the entry point.
 
-As you might have noticed, we ended up in a big black void, but don't worry, we haven't messed up (yet), we just haven't told the engine which floor we wish to generate.
-At this point we will have to once again talk about engine commands, in particular the ones from the `XS` group.
+As you might have noticed, we ended up in a big black void, but don't worry, we haven't messed up (yet); we just haven't told the engine which floor we wish to generate.
+At this point, we will have to once again talk about engine commands, in particular the ones from the `XS` group.
 
 - A variety of commands can be found [here]()
 - A more complete version [here]()
-- An an official (but for DE) [here]()
+- An official (but for DE) [here]()
 
-Right now, we are missing the ground. For that, we will have to tell the engine the map size, and the ground type.
+Right now, we are missing the ground. For that, we will have to tell the engine the map size and the ground type.
 
 ```c
-rmSetMapSize(8000,8000);
+rmSetMapSize(300,300);
 rmTerrainInitialize("great_plains\ground5_gp",0.0);
 ```
 
-And now we have a floor. But what good does a floor do, if we do not have anything to place on it?
+And now we have a floor. But what good does a floor do if we do not have anything to place on it?
 
 ### Basics
 
 Hopefully you know by now how to create a map, both `.xml` and `.xs` as well as the minimum required text to make it work. If you don't, just track back before continuing.
 
-In this first mini project, we will flush out our basic template a little.
+In this first mini project, we will flesh out our basic template a little.
 The first step is finding ourselves a working base template. If you have the previous one, great! If not, you can find one [here](./Project7_CustomMaps/EmptyMap/): [EmptyMap.xml](./Project7_CustomMaps/EmptyMap/EmptyMap.xml) and [EmptyMap.xs](./Project7_CustomMaps/EmptyMap/EmptyMap.xs).
 
 > Even though the `.xml` and `.xs` files are named EmptyMap, the ingame name is still the same as in the previous tutorial: `XS Tutorial Custom Map`.
 
-Now, what exactly makes Age of Empires 3, Age of Empires 3? Well, it's all the animals, trees, mines, natives, trade routes, and of course the players.
-Let's start with trees,
+Now, what exactly makes Age of Empires 3, Age of Empires 3? Well, it's all the animals, trees, mines, natives, trade routes, and of course, the players.
+
+So let's start with the players.
+
+For this, we have a very simple function `rmPlacePlayer`, which takes a played_id and an x and z coordinate pair.
+
+```c
+// Just some x and z coordinates to place our players
+float xAxis = 0.5;
+float zAxis1 = 0.25;
+float zAxis2 = (1.0 - zAxis1);
+
+// Setting up the TC (TC at start is responsible for spawning the villagers and crates, so we don't need to worry about that)
+int TCID = rmCreateObjectDef("player TC"); // Creating the TC id
+rmAddObjectDefItem(TCID, "townCenter", 1, 0); // TC id, receives 1 unit of type TownCenter, perfectly at location
+rmPlaceObjectDefAtLoc(TCID, 1, xAxis, zAxis1); // Now place that defined object for player 1
+rmPlaceObjectDefAtLoc(TCID, 2, xAxis, zAxis2); // And for player 2
+
+// And here we add our explorer (+dog for Spain)
+int startingUnits = rmCreateStartingUnitsObjectDef(5.0);
+rmPlaceObjectDefAtLoc(startingUnits, 1, xAxis+0.05, zAxis1+0.05);
+rmPlaceObjectDefAtLoc(startingUnits, 2, xAxis+0.05, zAxis2+0.05);
+```
+
+> Don't forget that Player 0 is Gaia.
+
+Now we have players, but the map is still empty and bland. Let's add some trees.
 
 ```c
 int i = 0;
@@ -676,10 +711,10 @@ for (i=0; <100)
     // Creating the treeID
     int treeID = rmCreateObjectDef("tree"+i);
 
-    // Creating an object with that id, in this case aa group of 2 to 3 "TreeGreatPlains", with a clustering distance of 4
+    // Creating an object with that id, in this case a group of 2 to 3 "TreeGreatPlains", with a clustering distance of 4
     rmAddObjectDefItem(treeID, "TreeGreatPlains", rmRandInt(2,3), 4.0);
 
-    // Finally we place the object on the map (at random for now)
+    // Finally, we place the object on the map (at random for now)
     rmPlaceObjectDefAtLoc(treeID, 0, rmRandFloat(0.0, 1.0), rmRandFloat(0.0, 1.0));
 }
 ```
@@ -707,7 +742,7 @@ for (i=0; <10)
 }
 ```
 
-We did once again mostly the same. Only difference now, is that we added a new `rmSetObjectDefCreateHerd` definition to our bison object, which will treat all the animals in that group as a herd.
+We did it once again, mostly the same. The only difference now is that we added a new `rmSetObjectDefCreateHerd` definition to our bison object, which will treat all the animals in that group as a herd.
 
 However, as you might have noticed already, we aren't always getting the numbers that we wish.
 
@@ -729,7 +764,7 @@ void main(void)
 }
 ```
 
-In this version we are creating a single mine, followed by a single tree, in the exact same place. If you try it out, you will realise that the mine always blocks the tree from spawning. And if you invert the order, the tree will always block the mine from spawning.
+In this version, we are creating a single mine, followed by a single tree, in the exact same place. If you try it out, you will realise that the mine always blocks the tree from spawning. And if you invert the order, the tree will always block the mine from spawning.
 
 This is a huge hassle. Imagine you load into a game and your Town Center isn't there?
 For this reason, most maps follow a specific order for placement, usually a mix of size and importance.
@@ -741,9 +776,15 @@ For this reason, most maps follow a specific order for placement, usually a mix 
 5. Common Resources (Mines, Trees, Hunts, Treasures, Herdables)
 6. Embellishments
 
+We will explore this order a bit more in the next subchapter, but for now, I'd recommend trying to create one map of your own with the same concept that we used. Particularly, try to find out what happens when you place 4 players in a 2-player map, or if you make the map too big, or too small. What happens if you just keep placing stuff at random? Do they have spacing? Clustering? Balance?
+
+If you do feel ready with both C and basic XS, then feel free to move to the next subchapter.
+
 ### Changing Existing Maps
 
-[Guide1](https://web.archive.org/web/20100421112530/http://hyenastudios.mugamo.com/aoe3rmstutorial.htm#I)
+This chapter will be relatively big. There will be lots of smaller concepts and functions.
+
+If you wish to start with a more general look, feel free to start with [M0nTy_PyTh0n's Guide](https://web.archive.org/web/20100421112530/http://hyenastudios.mugamo.com/aoe3rmstutorial.htm#I).
 
 ### Creating a Custom Map
 
