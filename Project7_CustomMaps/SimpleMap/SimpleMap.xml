@@ -1,0 +1,13 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<mapinfo
+    detailsText =  "XS Tutorial Simple Map\nDetails in Match Room."
+
+    imagepath  = "ui\random_map\great_plains"
+    displayName = "XS Tutorial Simple Map"
+    cannotReplace = ""
+    loadDetailsText = "XS Tutorial Simple Map.\nDetails while entering the match.\nSimple map with players, wood, food and gold."
+
+    loadBackground="ui\random_map\great_plains\great_plains_map">
+
+    <loadss>ui\random_map\great_plains\great_plains_ss_03</loadss>
+</mapinfo>
